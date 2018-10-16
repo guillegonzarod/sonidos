@@ -23,4 +23,23 @@ export class HomePage {
     // Vamos al archivo 'src/interfaces/animal.interface.ts':
   }
 
+  // 6.2. Codificamos la función 'reproducir(animal: Animal)' que actuará al hacer 'click' en un item:
+  reproducir(animal: Animal) {
+    console.log(animal);
+    // 6.3. Instanciamos un objeto tipo 'Audio' (forma parte de HTML5) para reproducir los sonidos:
+    let audio = new Audio();
+    // 6.4. Le asignamos la fuente del audio (*.mp3 o *.wav):
+    audio.src = animal.audio;
+    // 6.5. Ponemos la propiedad 'reproduciendo' del animal a true:
+    animal.reproduciendo = true;
+    // 6.6. Cargamos el audio y lo empezamos a reproducir: 
+    audio.load();
+    audio.play();
+    // 6.7. Codificamos un 'Timer()' para que, transcurrido el tiempo determinado por la propiedad 'duracion',
+    // en milisegundos, el valor de la propiedad 'reproduciendo' cambie a 'false':
+    setTimeout(() => {
+      animal.reproduciendo = false;
+    }, animal.duracion * 1000);
+  }
+  // 6.8. Vamos al achivo 'src/pages/home/home.html':
 }
