@@ -1,5 +1,6 @@
 <ion-header>
-  <ion-navbar>
+  <!--5.6. Le asignamos al elemento 'ion-navbar' el color 'primary':-->
+  <ion-navbar color="primary">
     <ion-title>
       <!--1.1. Sustituimos el título predeterminado:-->
       Sonidos APP
@@ -10,13 +11,17 @@
 <ion-content>
   <!--2.1. Pegamos el código de una 'Avatar List' y la modificamos para nuestro uso:-->
   <ion-list>
-    <ion-item>
+    <!--5.3. Recorremos la propiedad 'animales' tipo 'Animal[]' con un '*ngFor':-->
+    <ion-item *ngFor="let animal of animales">
       <ion-avatar item-start>
-        <img src="../../assets/animales/caballo.png">
+        <!--5.4. Por cada animal, le asignamos el valor de su propiedad 'imagen' al atributo 'src':-->
+        <img [src]="animal.imagen">
       </ion-avatar>
-      <h2>Caballo</h2>
+      <!--5.5. Por cada animal, mostramos el valor de su atributo 'nombre'-->
+      <h2>{{ animal.nombre }}</h2>
     </ion-item>
   </ion-list>
+  <!--3. Vamos al archivo 'src/pages/home/home.ts':-->
 </ion-content>
 <!--1.3. Copiamos el contenido multimedia en la carpeta '02-sonidos/src/assets':-->
 <!--1.4. Creamos el directorio '02-sonidos/src/datos' y pegamos el archivo 'data.animales.ts'-->
