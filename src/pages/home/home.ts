@@ -36,12 +36,12 @@ export class HomePage {
     this.pausar_audio(animal);
 
     // 7.6.: Le asignamos 'false' a la propiedad 'reproduciendo' del animal pasado como parámetro:
-    if ( animal.reproduciendo ) {
+    if (animal.reproduciendo) {
       animal.reproduciendo = false;
       // 7.6.1. Salimos de la funcion:
-      return; 
+      return;
     }
-
+    // 8. Vamos al archivo 'src/pages/home/home.html':
     console.log(animal);
     // 6.3. Instanciamos un objeto tipo 'Audio' (forma parte de HTML5) para reproducir los sonidos:
     // let audio = new Audio();
@@ -80,5 +80,11 @@ export class HomePage {
         animal.reproduciendo = false;
       }
     }
+  }
+  // 8.4. Codificamos el método para eliminar un item (mediante su índice pasado como parámetro) 
+  // de la lista de animales:
+  borrar_animal(indice: number) {
+    // 8.4.1. Eliminamos el elemento correspondiente del array 'animales':
+    this.animales.splice(indice, 1);
   }
 }

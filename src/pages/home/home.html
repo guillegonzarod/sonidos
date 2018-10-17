@@ -11,23 +11,38 @@
 <ion-content>
   <!--2.1. Pegamos el código de una 'Avatar List' y la modificamos para nuestro uso:-->
   <ion-list>
-    <!--5.3. Recorremos la propiedad 'animales' tipo 'Animal[]' con un '*ngFor':-->
-    <!--6.1. Añadimos el evento 'click al botón y le pasamos, como parámetro, el 'animal'-->
-    <ion-item *ngFor="let animal of animales" (click)="reproducir(animal)">
-      <!--6.2. Vamos al archivo 'src/pages/home/home.ts':-->
-      <ion-avatar item-start>
-        <!--5.4. Por cada animal, le asignamos el valor de su propiedad 'imagen' al atributo 'src':-->
-        <img [src]="animal.imagen">
-      </ion-avatar>
-      <!--5.5. Por cada animal, mostramos el valor de su atributo 'nombre'-->
-      <h2>{{ animal.nombre }}</h2>
-      <!--6.10. Mediante un '' mostramos u ocultamos los botones:-->
-      <!--6.8. Le añadimos un icono de 'play' y lo situamos al margen derecho 'item-right':-->
-      <ion-icon *ngIf="!animal.reproduciendo" name="play" item-right></ion-icon>
-      <!--6.9. Le añadimos un icono de 'pause' y lo situamos al margen derecho 'item-right':-->
-      <ion-icon *ngIf="animal.reproduciendo" name="pause" item-right></ion-icon>
-      <!--7. Vamos al archivo 'src/pages/home/home.ts':-->
-    </ion-item>
+    <!--8.1. Añadimos un elemento '<ion-item-sliding>' para poder eliminar el item al deslizar el 
+  dedo hacia la izquierda:-->
+    <!--8.1.1. Le añadimos el '*ngFor' en vez de hacerlo en el '<ion-item>'-->
+    <!--8.2. Le asignamos el índice del elemento 'animal' a la variable 'i'-->
+    <ion-item-sliding *ngFor="let animal of animales let i = index">
+      <!--5.3. Recorremos la propiedad 'animales' tipo 'Animal[]' con un '*ngFor':-->
+      <!--6.1. Añadimos el evento 'click al botón y le pasamos, como parámetro, el 'animal'-->
+      <ion-item (click)="reproducir(animal)">
+        <!--6.2. Vamos al archivo 'src/pages/home/home.ts':-->
+        <ion-avatar item-start>
+          <!--5.4. Por cada animal, le asignamos el valor de su propiedad 'imagen' al atributo 'src':-->
+          <img [src]="animal.imagen">
+        </ion-avatar>
+        <!--5.5. Por cada animal, mostramos el valor de su atributo 'nombre'-->
+        <h2>{{ animal.nombre }}</h2>
+        <!--6.10. Mediante un '' mostramos u ocultamos los botones:-->
+        <!--6.8. Le añadimos un icono de 'play' y lo situamos al margen derecho 'item-right':-->
+        <ion-icon *ngIf="!animal.reproduciendo" name="play" item-right></ion-icon>
+        <!--6.9. Le añadimos un icono de 'pause' y lo situamos al margen derecho 'item-right':-->
+        <ion-icon *ngIf="animal.reproduciendo" name="pause" item-right></ion-icon>
+        <!--7. Vamos al archivo 'src/pages/home/home.ts':-->
+      </ion-item>
+      <!--8.3. Añadimos el botón 'Borrar' para eliminar el elemento correspondiente (deslizando el dedo 
+    a la izquierda) utilizando su 'índice':-->
+      <ion-item-options side="right">
+        <button ion-button color="danger" (click)="borrar_animal( i )">
+          <ion-icon name="trash"></ion-icon>
+          Borrar
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+    <!--8.4. Vamos al archivo 'src/pages/home/home.ts':-->
   </ion-list>
   <!--3. Vamos al archivo 'src/pages/home/home.ts':-->
 </ion-content>
