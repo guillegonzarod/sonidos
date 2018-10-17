@@ -5,6 +5,8 @@ import { ANIMALES } from '../../datos/data.animales'
 // 5.1. Importamos la interfaz 'Animal':
 import { Animal } from '../../interfaces/animal.interface'
 import { analyzeAndValidateNgModules } from '@angular/compiler';
+// 9.2. Importamos la clase 'Refresher':
+import { Refresher } from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
@@ -86,5 +88,20 @@ export class HomePage {
   borrar_animal(indice: number) {
     // 8.4.1. Eliminamos el elemento correspondiente del array 'animales':
     this.animales.splice(indice, 1);
+  }
+  // 9. Vamos al achivo 'src/pages/home/home.html':
+  // 9.3. Codificamos el método que va a reiniciar el contenido del array de animales:
+  // 9.3.1. Debemos pasarle a la función un parámetro tipo 'Refresher':
+  recargar_animales(refresher: Refresher) {
+    console.log('Iniciamos el refresh');
+    // 9.3.2. Añadimos un 'Timer()' para que tarde un tiempo en ejecutarse, ya que sino, no
+    // daría casi tiempo a ver el refresco:
+    setTimeout(()=>{
+      // 9.3.3. Recargamos el array de animales:
+      this.animales = ANIMALES.slice(0);
+      // 9.3.4. Terminamos la ejecución del refresco:
+      console.log('Terminó el refresh');
+      refresher.complete();
+    }, 1500);
   }
 }

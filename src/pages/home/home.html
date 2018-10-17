@@ -9,6 +9,13 @@
 </ion-header>
 <!--1.2. Borramos el contenido predeterminado y el atributo 'padding':-->
 <ion-content>
+  <!--9.1. Añadimos el 'refresco' de la página cuando hacemos el gesto de deslizar hacia abajo:-->
+  <!--9.1.1. Cambiamos el nombre del método 'doRefresh()' que emite el evento ($event) por el de 
+    'recargar_animales()'-->
+  <ion-refresher (ionRefresh)="recargar_animales($event)">
+    <!--9.2. Vamos al archivo 'src/pages/home/home.ts':-->
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <!--2.1. Pegamos el código de una 'Avatar List' y la modificamos para nuestro uso:-->
   <ion-list>
     <!--8.1. Añadimos un elemento '<ion-item-sliding>' para poder eliminar el item al deslizar el 
