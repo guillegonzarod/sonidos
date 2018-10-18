@@ -5,6 +5,19 @@
       <!--1.1. Sustituimos el título predeterminado:-->
       Sonidos APP
     </ion-title>
+    <!--10.9. Hacemos que los botones se coloquen a la derecha mediante el atributo 'end':-->
+    <ion-buttons end>
+      <!--10.7. Añadimos un botón 'Ordenando' para cambiar el valor de la propiedad 'ordenando' a true
+      y solo lo mostramos en caso de que la propiedad 'ordenando' sea false:-->
+      <button *ngIf="!ordenando" ion-button (click)="ordenando = true">
+        Ordenando
+      </button>
+      <!--10.8. Añadimos un botón 'Listo' para cambiar el valor de la propiedad 'ordenando' a false
+y solo lo mostramos en caso de que la propiedad 'ordenando' sea true:-->
+      <button *ngIf="ordenando" ion-button (click)="ordenando = false">
+        Listo
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 <!--1.2. Borramos el contenido predeterminado y el atributo 'padding':-->
@@ -12,12 +25,20 @@
   <!--9.1. Añadimos el 'refresco' de la página cuando hacemos el gesto de deslizar hacia abajo:-->
   <!--9.1.1. Cambiamos el nombre del método 'doRefresh()' que emite el evento ($event) por el de 
     'recargar_animales()'-->
-  <ion-refresher (ionRefresh)="recargar_animales($event)">
+    <!--10.10. Deshabilitamos el 'refresh', mediante su atributo 'enabled', en caso de que la propiedad 
+      'ordenando' sea false-->
+  <ion-refresher [enabled]="!ordenando"
+   (ionRefresh)="recargar_animales($event)">
     <!--9.2. Vamos al archivo 'src/pages/home/home.ts':-->
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <!--2.1. Pegamos el código de una 'Avatar List' y la modificamos para nuestro uso:-->
-  <ion-list>
+  <!--10.1. Permitimos la reordenación de la lista mediante el atributo 'reorder':-->
+  <!--10.2. Una <ion-list> emite un evento ($event) cuando un item cambia de posición. Añadimos el 
+    método 'reordenar_animales()'. -->
+  <!--10.3. Vamos al archivo 'src/pages/home/home.ts'-->
+  <!--10.6. Le asignamos al atributo 'reorder' la propiedad 'ordenando':-->
+  <ion-list [reorder]="ordenando" (ionItemReorder)="reordenar_animales($event)">
     <!--8.1. Añadimos un elemento '<ion-item-sliding>' para poder eliminar el item al deslizar el 
   dedo hacia la izquierda:-->
     <!--8.1.1. Le añadimos el '*ngFor' en vez de hacerlo en el '<ion-item>'-->

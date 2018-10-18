@@ -7,6 +7,8 @@ import { Animal } from '../../interfaces/animal.interface'
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 // 9.2. Importamos la clase 'Refresher':
 import { Refresher } from 'ionic-angular';
+// 10.3. Importamos la función 'reorderArray':
+import { reorderArray } from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
@@ -24,6 +26,10 @@ export class HomePage {
   // 7.2. Instanciamos un objeto tipo 'number' para no crear un 'Timer()' cada vez que llamemos al 
   // método 'reproducir(animal: Animal)':
   audioTiempo: number;
+  // 10.5. Creamos una propiedad tipo 'boolean' para controlar que solo se muestre el botón de ordenar
+  // cuando se quiera ordenar la lista:
+  // 10.6. Vamos al archivo 'src/pages/home/home.html':
+  ordenando: boolean = false;
 
   constructor() {
     // 3.2. Le asignamos a la propiedad 'animales' una copia exacta del array de la constante 'ANIMALES':
@@ -96,12 +102,19 @@ export class HomePage {
     console.log('Iniciamos el refresh');
     // 9.3.2. Añadimos un 'Timer()' para que tarde un tiempo en ejecutarse, ya que sino, no
     // daría casi tiempo a ver el refresco:
-    setTimeout(()=>{
+    setTimeout(() => {
       // 9.3.3. Recargamos el array de animales:
       this.animales = ANIMALES.slice(0);
       // 9.3.4. Terminamos la ejecución del refresco:
       console.log('Terminó el refresh');
       refresher.complete();
     }, 1500);
+  }
+  // 10. Vamos al achivo 'src/pages/home/home.html':
+  // 10.4. Codificamos el método que actuará cuando se reordene la lista:
+  reordenar_animales(indices: any) {
+    console.log(indices);
+    // 10.4.1. Utilizamos el método 'reorderArray()' para reodernar el array:
+    this.animales = reorderArray(this.animales, indices);
   }
 }
